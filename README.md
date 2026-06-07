@@ -1,5 +1,9 @@
 # Supernote Links Plugin
 
+
+https://github.com/user-attachments/assets/ad421daa-8ed7-439c-b5a3-2af0e613526e
+
+
 A powerful, native-feeling plugin for Supernote that supercharges your link management. Generate interactive index pages of all links inside a note, create external web links, link to specific pages of other note files seamlessly, and manage broken links with ease.
 
 ## Features
