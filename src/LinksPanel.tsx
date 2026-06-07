@@ -56,7 +56,7 @@ type LinkRow = {
 };
 
 type Mode = 'index' | 'web' | 'file';
-type Pos = 'TL' | 'TR';
+type Pos = 'TL' | 'TR' | 'BL' | 'BR';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -148,7 +148,7 @@ export default function LinksPanel() {
     try {
       const dt = (await PluginManager.getDeviceType()) as any;
       const dtVal = typeof dt === 'number' ? dt : dt?.result;
-      setIsManta(dtVal === 5);
+      setIsManta(dtVal === 5 || dtVal === '5');
     } catch {
       // default nomad sizing
     }
@@ -358,8 +358,8 @@ export default function LinksPanel() {
     const label = (webLabel.trim() || domainOf(cleanUrl) || cleanUrl).trim();
     const dev = isManta ? NATIVE.manta : NATIVE.nomad;
     const width = estimateWidth(label, IDX_FONT, dev.w);
-    const top = 160;
-    const left = pos === 'TR' ? dev.w - width - 60 : 100;
+    const top = pos.startsWith('B') ? dev.h - 220 - IDX_LINK_H : 220;
+    const left = pos.endsWith('R') ? dev.w - width - 150 : 220;
     try {
       const res = (await PluginNoteAPI.insertTextLink({
         category: 0,
@@ -516,8 +516,8 @@ export default function LinksPanel() {
     const label = (fileLabel.trim() || filePath.split('/').pop() || filePath).trim();
     const dev = isManta ? NATIVE.manta : NATIVE.nomad;
     const width = estimateWidth(label, IDX_FONT, dev.w);
-    const top = 160;
-    const left = pos === 'TR' ? dev.w - width - 60 : 100;
+    const top = pos.startsWith('B') ? dev.h - 220 - IDX_LINK_H : 220;
+    const left = pos.endsWith('R') ? dev.w - width - 150 : 220;
     let baseLinkType = getLinkTypeForPath(filePath);
     
     const parsedPage = parseInt(destPageStr, 10);
@@ -674,10 +674,12 @@ export default function LinksPanel() {
                 onChangeText={setWebLabel}
                 placeholder={domainOf(url) || 'label (optional)'}
               />
-              <View style={styles.posRow}>
-                <Text style={styles.posLabel}>Place link:</Text>
-                <PosBtn label="Top-Left" active={pos === 'TL'} onPress={() => setPos('TL')} />
-                <PosBtn label="Top-Right" active={pos === 'TR'} onPress={() => setPos('TR')} />
+              <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+                <Text style={styles.posLabel}>Position:</Text>
+                <PosBtn label="TL" active={pos === 'TL'} onPress={() => setPos('TL')} />
+                <PosBtn label="TR" active={pos === 'TR'} onPress={() => setPos('TR')} />
+                <PosBtn label="BL" active={pos === 'BL'} onPress={() => setPos('BL')} />
+                <PosBtn label="BR" active={pos === 'BR'} onPress={() => setPos('BR')} />
               </View>
               <Pressable
                 onPress={insertWebLink}
@@ -730,10 +732,14 @@ export default function LinksPanel() {
                       ))}
                     </ScrollView>
                   )}
-                  <View style={styles.posRow}>
-                    <Text style={styles.posLabel}>Place link:</Text>
-                    <PosBtn label="Top-Left" active={pos === 'TL'} onPress={() => setPos('TL')} />
-                    <PosBtn label="Top-Right" active={pos === 'TR'} onPress={() => setPos('TR')} />
+                  <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                    <Text style={styles.posLabel}>Position:</Text>
+                    <View style={{flexDirection: 'row', gap: 10}}>
+                      <PosBtn label="TL" active={pos === 'TL'} onPress={() => setPos('TL')} />
+                      <PosBtn label="TR" active={pos === 'TR'} onPress={() => setPos('TR')} />
+                      <PosBtn label="BL" active={pos === 'BL'} onPress={() => setPos('BL')} />
+                      <PosBtn label="BR" active={pos === 'BR'} onPress={() => setPos('BR')} />
+                    </View>
                   </View>
                   <Pressable
                     onPress={insertFileLink}
