@@ -42,7 +42,7 @@ Once installed, you can launch the plugin at any time from the Plugins menu.
 ### 3. Creating File Links
 - Select the **File link** tab.
 - Tap **Select File** to browse your Supernote's storage for the target document.
-- Use the horizontal page chips to pick exactly which page the link should jump to. (If you want to just open the file to its last-read page, you can delete the page number entirely).
+- Use the horizontal page chips to pick exactly which page the link should jump to. (If you want to just open the file to its last-read page, you can delete the page number entirely). The target page number (e.g. `(p.3)`) is automatically appended to the inserted link's label.
 - Give it a label and tap **Add**.
 
 ### 4. Fixing Broken Links

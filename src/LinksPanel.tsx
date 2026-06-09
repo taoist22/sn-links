@@ -513,11 +513,8 @@ export default function LinksPanel() {
       return;
     }
     setBusy(true);
-    const label = (fileLabel.trim() || filePath.split('/').pop() || filePath).trim();
+    let label = (fileLabel.trim() || filePath.split('/').pop() || filePath).trim();
     const dev = isManta ? NATIVE.manta : NATIVE.nomad;
-    const width = estimateWidth(label, IDX_FONT, dev.w);
-    const top = pos.startsWith('B') ? dev.h - 220 - IDX_LINK_H : 220;
-    const left = pos.endsWith('R') ? dev.w - width - 150 : 220;
     let baseLinkType = getLinkTypeForPath(filePath);
     
     const parsedPage = parseInt(destPageStr, 10);
@@ -527,6 +524,17 @@ export default function LinksPanel() {
     if (baseLinkType === 0 && !hasSpecificPage) {
       baseLinkType = 1; // Link to whole file if no page specified
     }
+
+    if (hasSpecificPage) {
+      const pagePattern = /\s*\(p\.\s*\d+\)$/i;
+      if (!pagePattern.test(label)) {
+        label = `${label} (p.${parsedPage})`;
+      }
+    }
+
+    const width = estimateWidth(label, IDX_FONT, dev.w);
+    const top = pos.startsWith('B') ? dev.h - 220 - IDX_LINK_H : 220;
+    const left = pos.endsWith('R') ? dev.w - width - 150 : 220;
     
     let finalPath = filePath;
     if (!finalPath.startsWith('/storage/emulated/0/')) {

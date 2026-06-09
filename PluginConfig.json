@@ -2,8 +2,8 @@
   "name": "Links",
   "desc": "Build a tappable links index page from a note's links, and drop quick web links.",
   "iconPath": "assets/url.png",
-  "versionName": "0.2.0",
-  "versionCode": "2",
+  "versionName": "0.2.1",
+  "versionCode": "3",
   "pluginID": "linksplugin00001",
   "pluginKey": "Links",
   "jsMainPath": "index"

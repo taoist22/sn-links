@@ -673,6 +673,13 @@ main() {
     test_operating_system
 
     local project_root="${1:-$(pwd)}"
+    
+    # Clean up prior build directory to avoid ghost caching bugs
+    if [[ -d "$project_root/build" ]]; then
+        write_color_output "Cleaning up prior build directory..." "Blue"
+        rm -rf "$project_root/build"
+    fi
+
     get_package_info "$project_root"
 
     local gen_dir

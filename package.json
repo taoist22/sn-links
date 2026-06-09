@@ -1,6 +1,6 @@
 {
   "name": "Links",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Build a tappable links index page from a note's links, and drop quick web links.",
   "private": true,
   "scripts": {
