@@ -20,7 +20,7 @@ A powerful, native-feeling plugin for Supernote that supercharges your link mana
 
 ## Installation
 
-1. Download the latest `Links.snplg` file from the [Releases](https://github.com/) page.
+1. Download the latest `Links.snplg` file from the [Releases](https://github.com/taoist22/sn-links/releases) page.
 2. Connect your Supernote to your computer or use the Supernote Cloud/Partner App.
 3. Copy the `Links.snplg` file into the `MyStyle` folder on your Supernote device.
 4. Install the plugin on your Supernote device by going to `Manage Plugins` and selecting `Links`.
